@@ -19,6 +19,104 @@ This project is a full freelance platform website created using Vite React, Node
 - Page Builder
 - Freelance Platform (multi-purpose platform project)
 
+## Full Project Structure
+
+freelance-platform-website/
+│── 📁 backend/               # Node.js & Express server
+    │── 📁 mongodb/           # MongoDB configuration
+    │   │── schema.js         # Database schema definition (all models)
+    │   │── migrations/       # Database migrations
+    │── 📁 src/
+    │   │── 📁 config/        # Configuration files
+    │   │   │── db.js         # MongoDB database connection
+    │   │   │── redis.js      # Redis caching client setup
+    │   │   └── dotenv.js     # Environment variables setup
+    │   │── 📁 middleware/    # Authentication & authorization middleware
+    │   │   │── authMiddleware.js # JWT & Role-Based Access (RBAC)
+    │   │   │── rateLimit.js  # Rate limiting (security)
+    │   │   └── upload.js     # Media uploads middleware
+    │   │── 📁 routes/        # API routes (Modular)
+    │   │   │── authRoutes.js         # Signup, login, JWT, 2FA
+    │   │   │── userRoutes.js         # User profile & account actions
+    │   │   │── jobRoutes.js          # Job posting & applications
+    │   │   │── socialRoutes.js       # Posts, comments, likes
+    │   │   │── chatRoutes.js         # Real-time messaging
+    │   │   │── mediaRoutes.js        # File uploads & management
+    │   │   │── pageRoutes.js         # Custom pages & page builder
+    │   │   │── groupRoutes.js        # Group creation & management
+    │   │   │── blogRoutes.js         # Blog posts & comments
+    │   │   │── friendRoutes.js       # Friend requests & connections
+    │   │   │── adminRoutes.js        # Admin controls
+    │   │   └── paymentRoutes.js      # Payment processing
+    │   │── 📁 controllers/       # Business logic (separates concerns)
+    │   │   │── authController.js     # Auth logic (JWT, Argon2, Redis, 2FA)
+    │   │   │── userController.js     # User-related functions
+    │   │   │── jobController.js      # Job-related functions
+    │   │   │── socialController.js   # Social networking functions
+    │   │   │── chatController.js     # Chat & messaging functions
+    │   │   │── mediaController.js    # Media upload & management
+    │   │   │── pageController.js     # Custom pages & page builder
+    │   │   │── groupController.js    # Group management functions
+    │   │   │── blogController.js     # Blog management functions
+    │   │   │── friendController.js   # Friend connection functions
+    │   │   │── adminController.js    # Admin functions
+    │   │   └── paymentController.js  # Payment processing
+    │   │── 📁 utils/             # Utility functions
+    │   │   │── jwt.js            # JWT helper functions
+    │   │   │── email.js          # Email sending for OTP
+    │   │   │── logger.js         # Logging system
+    │   │   │── argon2.js         # Argon2 password hashing
+    │   │   │── encryption.js     # End-to-end encryption for chat
+    │   │   └── fileStorage.js    # File handling utilities
+    │   │── 📁 services/          # Business logic services
+    │   │   │── authService.js      # Authentication service
+    │   │   │── userService.js      # User service
+    │   │   │── jobService.js       # Job posting & matching service
+    │   │   │── socialService.js    # Social networking service
+    │   │   │── chatService.js      # Real-time messaging service
+    │   │   │── mediaService.js     # Media handling service
+    │   │   │── pageService.js      # Page builder service
+    │   │   │── groupService.js     # Group management service
+    │   │   │── blogService.js      # Blog handling service
+    │   │   │── friendService.js    # Friend networking service
+    │   │   │── adminService.js     # Admin service
+    │   │   └── paymentService.js   # Payment processing service
+    │   │── 📁 validators/        # Input validation
+    │   │   │── authValidator.js    # Validate auth inputs
+    │   │   │── userValidator.js    # Validate user inputs
+    │   │   │── jobValidator.js     # Validate job inputs
+    │   │   │── socialValidator.js  # Validate social content
+    │   │   │── mediaValidator.js   # Validate file uploads
+    │   │   └── paymentValidator.js # Validate payment data
+    │   │── 📁 websockets/        # Real-time functionality
+    │   │   │── chatSocket.js      # Chat websocket handling
+    │   │   │── notificationSocket.js # Real-time notifications
+    │   │── app.js                # Express server setup
+    │   └── server.js             # Entry point
+    │── 📁 tests/                 # API testing (Jest, Supertest)
+    │   │── auth.test.js          # Test authentication flow
+    │   │── jobs.test.js          # Test job posting & applications
+    │   │── social.test.js        # Test social networking features
+    │   │── chat.test.js          # Test messaging functionality
+    │── 📁 docs/                  # API documentation (Swagger/Postman)
+    │   │── api-docs.yaml         # OpenAPI/Swagger specification
+    │   └── installation-guide.md # Step-by-step installer guide
+    │── .env                      # Environment variables
+    │── .gitignore                # Ignore sensitive files
+    │── package.json              # Project metadata & dependencies
+    └── README.md                 # Project documentation
+```
+```
+This structure better supports the feature requirements:
+
+1. **Job Portal** - Added dedicated routes, controllers, and services for job posting/searching
+2. **Social Networking** - Added components for posts, friends, groups, and media
+3. **Chat System** - Added websockets folder for real-time communication with E2E encryption
+4. **Pages & Blogs** - Added dedicated modules for content management
+5. **Installer Guide** - Added to docs folder for step-by-step setup
+6. **Payment Processing** - Essential for a freelance marketplace
+```
+
 ## Installation
 
 1. Clone the repository:
