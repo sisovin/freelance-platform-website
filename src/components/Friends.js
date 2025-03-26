@@ -8,7 +8,7 @@ const Friends = () => {
     // Fetch friends from the server
     const fetchFriends = async () => {
       try {
-        const response = await fetch('/api/friends');
+        const response = await fetch('/api/friendRoutes/friends');
         const data = await response.json();
         setFriends(data);
       } catch (error) {
@@ -26,7 +26,7 @@ const Friends = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/friends', {
+      const response = await fetch('/api/friendRoutes/friends', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

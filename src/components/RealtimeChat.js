@@ -8,7 +8,7 @@ const RealtimeChat = () => {
     // Fetch chat messages from the server
     const fetchMessages = async () => {
       try {
-        const response = await fetch('/api/chat/messages');
+        const response = await fetch('/api/chatRoutes/messages');
         const data = await response.json();
         setMessages(data);
       } catch (error) {
@@ -26,7 +26,7 @@ const RealtimeChat = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/chat/messages', {
+      const response = await fetch('/api/chatRoutes/messages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

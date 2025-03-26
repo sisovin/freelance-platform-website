@@ -51,6 +51,13 @@ This project is a full freelance platform website created using Vite React, Node
 3. Register a new user account and complete your profile.
 4. Explore the various features of the platform, such as creating social network posts, joining groups, uploading media, and more.
 
+## Installer Guide
+
+1. **Welcome to the installer!**
+2. **Set up your environment variables.**
+3. **Install dependencies.**
+4. **Start the development server.**
+
 ## Contributing
 
 We welcome contributions to the project! If you would like to contribute, please follow these steps:

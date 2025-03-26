@@ -8,7 +8,7 @@ const Media = () => {
     // Fetch media files from the server
     const fetchMediaFiles = async () => {
       try {
-        const response = await fetch('/api/media');
+        const response = await fetch('/api/mediaRoutes/media');
         const data = await response.json();
         setMediaFiles(data);
       } catch (error) {
@@ -29,7 +29,7 @@ const Media = () => {
     formData.append('file', newMedia);
 
     try {
-      const response = await fetch('/api/media', {
+      const response = await fetch('/api/mediaRoutes/media', {
         method: 'POST',
         body: formData
       });

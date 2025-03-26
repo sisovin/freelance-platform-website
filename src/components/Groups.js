@@ -8,7 +8,7 @@ const Groups = () => {
     // Fetch groups from the server
     const fetchGroups = async () => {
       try {
-        const response = await fetch('/api/groups');
+        const response = await fetch('/api/groupRoutes/groups');
         const data = await response.json();
         setGroups(data);
       } catch (error) {
@@ -26,7 +26,7 @@ const Groups = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/groups', {
+      const response = await fetch('/api/groupRoutes/groups', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

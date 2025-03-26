@@ -18,6 +18,30 @@ const PageBuilder = () => {
     setSections(updatedSections);
   };
 
+  const fetchPageData = async () => {
+    try {
+      const response = await fetch('/api/pageRoutes/pages');
+      const data = await response.json();
+      setSections(data);
+    } catch (error) {
+      console.error('Error fetching page data:', error);
+    }
+  };
+
+  const savePageData = async () => {
+    try {
+      await fetch('/api/pageRoutes/pages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sections)
+      });
+    } catch (error) {
+      console.error('Error saving page data:', error);
+    }
+  };
+
   return (
     <div>
       <h2>Page Builder</h2>
@@ -38,6 +62,8 @@ const PageBuilder = () => {
           </div>
         ))}
       </div>
+      <button onClick={fetchPageData}>Fetch Page Data</button>
+      <button onClick={savePageData}>Save Page Data</button>
     </div>
   );
 };

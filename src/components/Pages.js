@@ -8,7 +8,7 @@ const Pages = () => {
     // Fetch pages from the server
     const fetchPages = async () => {
       try {
-        const response = await fetch('/api/pages');
+        const response = await fetch('/api/pageRoutes/pages');
         const data = await response.json();
         setPages(data);
       } catch (error) {
@@ -26,7 +26,7 @@ const Pages = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/pages', {
+      const response = await fetch('/api/pageRoutes/pages', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
