@@ -1,0 +1,778 @@
+openapi: 3.0.0
+info:
+  title: Freelance Platform API
+  description: API documentation for the Freelance Platform
+  version: 1.0.0
+servers:
+  - url: http://localhost:3000/api
+paths:
+  /auth/signup:
+    post:
+      summary: User signup
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: User created successfully
+        '400':
+          description: Invalid input
+  /auth/login:
+    post:
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: User logged in successfully
+        '401':
+          description: Invalid credentials
+  /auth/token:
+    post:
+      summary: Generate JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Token generated successfully
+        '401':
+          description: Invalid credentials
+  /auth/2fa/setup:
+    post:
+      summary: Setup 2FA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: 2FA setup successfully
+        '401':
+          description: Invalid token
+  /auth/2fa/verify:
+    post:
+      summary: Verify 2FA
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      responses:
+        '200':
+          description: 2FA verified successfully
+        '401':
+          description: Invalid token
+  /user/profile:
+    get:
+      summary: Get user profile
+      responses:
+        '200':
+          description: User profile retrieved successfully
+        '401':
+          description: Unauthorized
+    put:
+      summary: Update user profile
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                bio:
+                  type: string
+                profilePicture:
+                  type: string
+      responses:
+        '200':
+          description: User profile updated successfully
+        '401':
+          description: Unauthorized
+  /user/change-password:
+    put:
+      summary: Change user password
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                oldPassword:
+                  type: string
+                newPassword:
+                  type: string
+      responses:
+        '200':
+          description: Password changed successfully
+        '401':
+          description: Unauthorized
+  /user/delete-account:
+    delete:
+      summary: Delete user account
+      responses:
+        '200':
+          description: User account deleted successfully
+        '401':
+          description: Unauthorized
+  /jobs:
+    post:
+      summary: Create job posting
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                location:
+                  type: string
+                salary:
+                  type: string
+                deadline:
+                  type: string
+      responses:
+        '201':
+          description: Job created successfully
+        '400':
+          description: Invalid input
+    get:
+      summary: Get all job postings
+      responses:
+        '200':
+          description: Job postings retrieved successfully
+  /jobs/{jobId}:
+    get:
+      summary: Get job posting by ID
+      parameters:
+        - in: path
+          name: jobId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job posting retrieved successfully
+        '404':
+          description: Job not found
+    put:
+      summary: Update job posting
+      parameters:
+        - in: path
+          name: jobId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                description:
+                  type: string
+                location:
+                  type: string
+                salary:
+                  type: string
+                deadline:
+                  type: string
+      responses:
+        '200':
+          description: Job updated successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: Job not found
+    delete:
+      summary: Delete job posting
+      parameters:
+        - in: path
+          name: jobId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job deleted successfully
+        '404':
+          description: Job not found
+  /social/posts:
+    post:
+      summary: Create social post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '201':
+          description: Post created successfully
+        '400':
+          description: Invalid input
+    get:
+      summary: Get all social posts
+      responses:
+        '200':
+          description: Posts retrieved successfully
+  /social/posts/{postId}:
+    put:
+      summary: Update social post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Post updated successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: Post not found
+    delete:
+      summary: Delete social post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Post deleted successfully
+        '404':
+          description: Post not found
+  /social/posts/{postId}/like:
+    post:
+      summary: Like social post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Post liked successfully
+        '404':
+          description: Post not found
+  /social/posts/{postId}/comment:
+    post:
+      summary: Comment on social post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '201':
+          description: Comment added successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: Post not found
+  /chat/send:
+    post:
+      summary: Send chat message
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '201':
+          description: Message sent successfully
+        '400':
+          description: Invalid input
+  /chat/receive:
+    get:
+      summary: Receive chat messages
+      responses:
+        '200':
+          description: Messages retrieved successfully
+  /media:
+    post:
+      summary: Upload media file
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '201':
+          description: Media file uploaded successfully
+        '400':
+          description: Invalid input
+    get:
+      summary: Get all media files
+      responses:
+        '200':
+          description: Media files retrieved successfully
+  /media/{mediaId}:
+    put:
+      summary: Update media file
+      parameters:
+        - in: path
+          name: mediaId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                url:
+                  type: string
+      responses:
+        '200':
+          description: Media file updated successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: Media file not found
+    delete:
+      summary: Delete media file
+      parameters:
+        - in: path
+          name: mediaId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Media file deleted successfully
+        '404':
+          description: Media file not found
+  /pages:
+    post:
+      summary: Create custom page
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '201':
+          description: Page created successfully
+        '400':
+          description: Invalid input
+    get:
+      summary: Get all custom pages
+      responses:
+        '200':
+          description: Pages retrieved successfully
+  /pages/{pageId}:
+    put:
+      summary: Update custom page
+      parameters:
+        - in: path
+          name: pageId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Page updated successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: Page not found
+    delete:
+      summary: Delete custom page
+      parameters:
+        - in: path
+          name: pageId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Page deleted successfully
+        '404':
+          description: Page not found
+  /groups:
+    post:
+      summary: Create group
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '201':
+          description: Group created successfully
+        '400':
+          description: Invalid input
+    get:
+      summary: Get all groups
+      responses:
+        '200':
+          description: Groups retrieved successfully
+  /groups/{groupId}:
+    put:
+      summary: Update group
+      parameters:
+        - in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Group updated successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: Group not found
+    delete:
+      summary: Delete group
+      parameters:
+        - in: path
+          name: groupId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Group deleted successfully
+        '404':
+          description: Group not found
+  /blogs:
+    post:
+      summary: Create blog post
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '201':
+          description: Blog post created successfully
+        '400':
+          description: Invalid input
+    get:
+      summary: Get all blog posts
+      responses:
+        '200':
+          description: Blog posts retrieved successfully
+  /blogs/{blogId}:
+    put:
+      summary: Update blog post
+      parameters:
+        - in: path
+          name: blogId
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Blog post updated successfully
+        '400':
+          description: Invalid input
+        '404':
+          description: Blog post not found
+    delete:
+      summary: Delete blog post
+      parameters:
+        - in: path
+          name: blogId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Blog post deleted successfully
+        '404':
+          description: Blog post not found
+  /friends:
+    post:
+      summary: Send friend request
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                friendId:
+                  type: string
+      responses:
+        '201':
+          description: Friend request sent successfully
+        '400':
+          description: Invalid input
+    get:
+      summary: Get all friends
+      responses:
+        '200':
+          description: Friends retrieved successfully
+  /friends/{friendId}:
+    put:
+      summary: Accept friend request
+      parameters:
+        - in: path
+          name: friendId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Friend request accepted successfully
+        '404':
+          description: Friend request not found
+    delete:
+      summary: Delete friend
+      parameters:
+        - in: path
+          name: friendId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Friend deleted successfully
+        '404':
+          description: Friend not found
+  /admin/users:
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: Users retrieved successfully
+  /admin/users/{userId}:
+    delete:
+      summary: Delete user
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User deleted successfully
+        '404':
+          description: User not found
+  /admin/jobs:
+    get:
+      summary: Get all jobs
+      responses:
+        '200':
+          description: Jobs retrieved successfully
+  /admin/jobs/{jobId}:
+    delete:
+      summary: Delete job
+      parameters:
+        - in: path
+          name: jobId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Job deleted successfully
+        '404':
+          description: Job not found
+  /admin/posts:
+    get:
+      summary: Get all posts
+      responses:
+        '200':
+          description: Posts retrieved successfully
+  /admin/posts/{postId}:
+    delete:
+      summary: Delete post
+      parameters:
+        - in: path
+          name: postId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Post deleted successfully
+        '404':
+          description: Post not found
+  /payments:
+    post:
+      summary: Process payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                amount:
+                  type: number
+                currency:
+                  type: string
+                paymentMethod:
+                  type: string
+      responses:
+        '201':
+          description: Payment processed successfully
+        '400':
+          description: Invalid input
+    get:
+      summary: Get all payments
+      responses:
+        '200':
+          description: Payments retrieved successfully
+  /payments/{paymentId}:
+    get:
+      summary: Get payment by ID
+      parameters:
+        - in: path
+          name: paymentId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment retrieved successfully
+        '404':
+          description: Payment not found
+    delete:
+      summary: Delete payment
+      parameters:
+        - in: path
+          name: paymentId
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment deleted successfully
+        '404':
+          description: Payment not found
