@@ -1,4 +1,4 @@
-# freelance-platform-website
+# Freelance Platform Website
 
 ## Description
 
