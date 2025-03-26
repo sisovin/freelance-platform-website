@@ -21,6 +21,7 @@ This project is a full freelance platform website created using Vite React, Node
 
 ## Full Project Structure
 
+```
 freelance-platform-website/
 │── 📁 backend/               # Node.js & Express server
     │── 📁 mongodb/           # MongoDB configuration
