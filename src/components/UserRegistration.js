@@ -6,14 +6,25 @@ const UserRegistration = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       alert('Passwords do not match');
       return;
     }
-    // Handle user registration logic here
-    console.log('User registered:', { username, email, password });
+    try {
+      const response = await fetch('/api/authRoutes/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, email, password })
+      });
+      const data = await response.json();
+      console.log('User registered:', data);
+    } catch (error) {
+      console.error('Error registering user:', error);
+    }
   };
 
   return (

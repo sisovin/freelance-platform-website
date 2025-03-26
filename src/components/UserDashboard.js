@@ -16,7 +16,7 @@ const UserDashboard = () => {
     // Fetch user dashboard data from the server
     const fetchUserData = async () => {
       try {
-        const response = await fetch('/api/user/dashboard');
+        const response = await fetch('/api/userRoutes/dashboard');
         const data = await response.json();
         setUserData(data);
       } catch (error) {

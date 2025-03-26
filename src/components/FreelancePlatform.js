@@ -13,7 +13,7 @@ const FreelancePlatform = () => {
     // Fetch freelance projects from the server
     const fetchProjects = async () => {
       try {
-        const response = await fetch('/api/projects');
+        const response = await fetch('/api/jobRoutes/projects');
         const data = await response.json();
         setProjects(data);
       } catch (error) {
@@ -35,7 +35,7 @@ const FreelancePlatform = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/projects', {
+      const response = await fetch('/api/jobRoutes/projects', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

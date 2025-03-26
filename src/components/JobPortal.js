@@ -13,7 +13,7 @@ const JobPortal = () => {
     // Fetch job listings from the server
     const fetchJobListings = async () => {
       try {
-        const response = await fetch('/api/jobs');
+        const response = await fetch('/api/jobRoutes/jobs');
         const data = await response.json();
         setJobListings(data);
       } catch (error) {
@@ -35,7 +35,7 @@ const JobPortal = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/jobs', {
+      const response = await fetch('/api/jobRoutes/jobs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

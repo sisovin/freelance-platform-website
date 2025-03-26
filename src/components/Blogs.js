@@ -11,7 +11,7 @@ const Blogs = () => {
     // Fetch blog posts from the server
     const fetchBlogs = async () => {
       try {
-        const response = await fetch('/api/blogs');
+        const response = await fetch('/api/blogRoutes/blogs');
         const data = await response.json();
         setBlogs(data);
       } catch (error) {
@@ -33,7 +33,7 @@ const Blogs = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/blogs', {
+      const response = await fetch('/api/blogRoutes/blogs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

@@ -8,7 +8,7 @@ const SocialNetworkPosts = () => {
     // Fetch posts from the server
     const fetchPosts = async () => {
       try {
-        const response = await fetch('/api/posts');
+        const response = await fetch('/api/socialRoutes/posts');
         const data = await response.json();
         setPosts(data);
       } catch (error) {
@@ -26,7 +26,7 @@ const SocialNetworkPosts = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/posts', {
+      const response = await fetch('/api/socialRoutes/posts', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

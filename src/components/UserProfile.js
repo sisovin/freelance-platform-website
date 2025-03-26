@@ -12,7 +12,7 @@ const UserProfile = () => {
     // Fetch user profile data from the server
     const fetchUserData = async () => {
       try {
-        const response = await fetch('/api/user/profile');
+        const response = await fetch('/api/userRoutes/profile');
         const data = await response.json();
         setUserData(data);
       } catch (error) {
@@ -34,7 +34,7 @@ const UserProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/user/profile', {
+      const response = await fetch('/api/userRoutes/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
