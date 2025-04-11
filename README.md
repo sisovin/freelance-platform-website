@@ -24,81 +24,81 @@ This project is a full freelance platform website created using Vite React, Node
 ```
 freelance-platform-website/
 │── 📁 backend/               # Node.js & Express server
-    │── 📁 mongodb/           # MongoDB configuration
-    │   │── schema.js         # Database schema definition (all models)
+    │── 📁 drizzle/           # drizzle configuration
+    │   │── schema.ts         # Database schema definition (all models)
     │   │── migrations/       # Database migrations
     │── 📁 src/
     │   │── 📁 config/        # Configuration files
-    │   │   │── db.js         # MongoDB database connection
-    │   │   │── redis.js      # Redis caching client setup
-    │   │   └── dotenv.js     # Environment variables setup
+    │   │   │── db.ts         # drizzle database connection
+    │   │   │── redis.ts      # Redis caching client setup
+    │   │   └── dotenv.ts     # Environment variables setup
     │   │── 📁 middleware/    # Authentication & authorization middleware
-    │   │   │── authMiddleware.js # JWT & Role-Based Access (RBAC)
-    │   │   │── rateLimit.js  # Rate limiting (security)
-    │   │   └── upload.js     # Media uploads middleware
+    │   │   │── authMiddleware.ts # JWT & Role-Based Access (RBAC)
+    │   │   │── rateLimit.ts  # Rate limiting (security)
+    │   │   └── upload.ts     # Media uploads middleware
     │   │── 📁 routes/        # API routes (Modular)
-    │   │   │── authRoutes.js         # Signup, login, JWT, 2FA
-    │   │   │── userRoutes.js         # User profile & account actions
-    │   │   │── jobRoutes.js          # Job posting & applications
-    │   │   │── socialRoutes.js       # Posts, comments, likes
-    │   │   │── chatRoutes.js         # Real-time messaging
-    │   │   │── mediaRoutes.js        # File uploads & management
-    │   │   │── pageRoutes.js         # Custom pages & page builder
-    │   │   │── groupRoutes.js        # Group creation & management
-    │   │   │── blogRoutes.js         # Blog posts & comments
-    │   │   │── friendRoutes.js       # Friend requests & connections
-    │   │   │── adminRoutes.js        # Admin controls
-    │   │   └── paymentRoutes.js      # Payment processing
+    │   │   │── authRoutes.ts         # Signup, login, JWT, 2FA
+    │   │   │── userRoutes.ts         # User profile & account actions
+    │   │   │── jobRoutes.ts          # Job posting & applications
+    │   │   │── socialRoutes.ts       # Posts, comments, likes
+    │   │   │── chatRoutes.ts         # Real-time messaging
+    │   │   │── mediaRoutes.ts        # File uploads & management
+    │   │   │── pageRoutes.ts         # Custom pages & page builder
+    │   │   │── groupRoutes.ts        # Group creation & management
+    │   │   │── blogRoutes.ts         # Blog posts & comments
+    │   │   │── friendRoutes.ts       # Friend requests & connections
+    │   │   │── adminRoutes.ts        # Admin controls
+    │   │   └── paymentRoutes.ts      # Payment processing
     │   │── 📁 controllers/       # Business logic (separates concerns)
-    │   │   │── authController.js     # Auth logic (JWT, Argon2, Redis, 2FA)
-    │   │   │── userController.js     # User-related functions
-    │   │   │── jobController.js      # Job-related functions
-    │   │   │── socialController.js   # Social networking functions
-    │   │   │── chatController.js     # Chat & messaging functions
-    │   │   │── mediaController.js    # Media upload & management
-    │   │   │── pageController.js     # Custom pages & page builder
-    │   │   │── groupController.js    # Group management functions
-    │   │   │── blogController.js     # Blog management functions
-    │   │   │── friendController.js   # Friend connection functions
-    │   │   │── adminController.js    # Admin functions
-    │   │   └── paymentController.js  # Payment processing
+    │   │   │── authController.ts     # Auth logic (JWT, Argon2, Redis, 2FA)
+    │   │   │── userController.ts     # User-related functions
+    │   │   │── jobController.ts      # Job-related functions
+    │   │   │── socialController.ts   # Social networking functions
+    │   │   │── chatController.ts     # Chat & messaging functions
+    │   │   │── mediaController.ts    # Media upload & management
+    │   │   │── pageController.ts     # Custom pages & page builder
+    │   │   │── groupController.ts    # Group management functions
+    │   │   │── blogController.ts     # Blog management functions
+    │   │   │── friendController.ts   # Friend connection functions
+    │   │   │── adminController.ts    # Admin functions
+    │   │   └── paymentController.ts  # Payment processing
     │   │── 📁 utils/             # Utility functions
-    │   │   │── jwt.js            # JWT helper functions
-    │   │   │── email.js          # Email sending for OTP
-    │   │   │── logger.js         # Logging system
-    │   │   │── argon2.js         # Argon2 password hashing
-    │   │   │── encryption.js     # End-to-end encryption for chat
-    │   │   └── fileStorage.js    # File handling utilities
+    │   │   │── jwt.ts            # JWT helper functions
+    │   │   │── email.ts          # Email sending for OTP
+    │   │   │── logger.ts         # Logging system
+    │   │   │── argon2.ts         # Argon2 password hashing
+    │   │   │── encryption.ts     # End-to-end encryption for chat
+    │   │   └── fileStorage.ts    # File handling utilities
     │   │── 📁 services/          # Business logic services
-    │   │   │── authService.js      # Authentication service
-    │   │   │── userService.js      # User service
-    │   │   │── jobService.js       # Job posting & matching service
-    │   │   │── socialService.js    # Social networking service
-    │   │   │── chatService.js      # Real-time messaging service
-    │   │   │── mediaService.js     # Media handling service
-    │   │   │── pageService.js      # Page builder service
-    │   │   │── groupService.js     # Group management service
-    │   │   │── blogService.js      # Blog handling service
-    │   │   │── friendService.js    # Friend networking service
-    │   │   │── adminService.js     # Admin service
-    │   │   └── paymentService.js   # Payment processing service
+    │   │   │── authService.ts      # Authentication service
+    │   │   │── userService.ts      # User service
+    │   │   │── jobService.ts       # Job posting & matching service
+    │   │   │── socialService.ts    # Social networking service
+    │   │   │── chatService.ts      # Real-time messaging service
+    │   │   │── mediaService.ts     # Media handling service
+    │   │   │── pageService.ts      # Page builder service
+    │   │   │── groupService.ts     # Group management service
+    │   │   │── blogService.ts      # Blog handling service
+    │   │   │── friendService.ts    # Friend networking service
+    │   │   │── adminService.ts     # Admin service
+    │   │   └── paymentService.ts   # Payment processing service
     │   │── 📁 validators/        # Input validation
-    │   │   │── authValidator.js    # Validate auth inputs
-    │   │   │── userValidator.js    # Validate user inputs
-    │   │   │── jobValidator.js     # Validate job inputs
-    │   │   │── socialValidator.js  # Validate social content
-    │   │   │── mediaValidator.js   # Validate file uploads
-    │   │   └── paymentValidator.js # Validate payment data
+    │   │   │── authValidator.ts    # Validate auth inputs
+    │   │   │── userValidator.ts    # Validate user inputs
+    │   │   │── jobValidator.ts     # Validate job inputs
+    │   │   │── socialValidator.ts  # Validate social content
+    │   │   │── mediaValidator.ts   # Validate file uploads
+    │   │   └── paymentValidator.ts # Validate payment data
     │   │── 📁 websockets/        # Real-time functionality
-    │   │   │── chatSocket.js      # Chat websocket handling
-    │   │   │── notificationSocket.js # Real-time notifications
-    │   │── app.js                # Express server setup
-    │   └── server.js             # Entry point
+    │   │   │── chatSocket.ts      # Chat websocket handling
+    │   │   │── notificationSocket.ts # Real-time notifications
+    │   │── app.ts                # Express server setup
+    │   └── server.ts             # Entry point
     │── 📁 tests/                 # API testing (Jest, Supertest)
-    │   │── auth.test.js          # Test authentication flow
-    │   │── jobs.test.js          # Test job posting & applications
-    │   │── social.test.js        # Test social networking features
-    │   │── chat.test.js          # Test messaging functionality
+    │   │── auth.test.ts          # Test authentication flow
+    │   │── jobs.test.ts          # Test job posting & applications
+    │   │── social.test.ts        # Test social networking features
+    │   │── chat.test.ts          # Test messaging functionality
     │── 📁 docs/                  # API documentation (Swagger/Postman)
     │   │── api-docs.yaml         # OpenAPI/Swagger specification
     │   └── installation-guide.md # Step-by-step installer guide

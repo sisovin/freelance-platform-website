@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
+interface Project {
+  id: string;
+  title: string;
+  description: string;
+  budget: string;
+  deadline: string;
+}
+
 const FreelancePlatform = () => {
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [newProject, setNewProject] = useState({
     title: '',
     description: '',
@@ -24,7 +32,7 @@ const FreelancePlatform = () => {
     fetchProjects();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setNewProject({
       ...newProject,
@@ -32,7 +40,7 @@ const FreelancePlatform = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('/api/projects', {
@@ -60,41 +68,52 @@ const FreelancePlatform = () => {
       <h2>Freelance Platform</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title:</label>
+          <label htmlFor="title-input">Title:</label>
           <input
+            id="title-input"
             type="text"
             name="title"
             value={newProject.title}
             onChange={handleInputChange}
+            placeholder="Enter project title"
+            aria-label="Project title"
             required
           />
         </div>
         <div>
-          <label>Description:</label>
+          <label htmlFor="description-input">Description:</label>
           <textarea
+            id="description-input"
             name="description"
             value={newProject.description}
             onChange={handleInputChange}
+            placeholder="Enter project description"
+            aria-label="Project description"
             required
           />
         </div>
         <div>
-          <label>Budget:</label>
+          <label htmlFor="budget-input">Budget:</label>
           <input
+            id="budget-input"
             type="text"
             name="budget"
             value={newProject.budget}
             onChange={handleInputChange}
+            placeholder="Enter project budget"
+            aria-label="Project budget"
             required
           />
         </div>
         <div>
-          <label>Deadline:</label>
+          <label htmlFor="deadline-input">Deadline:</label>
           <input
+            id="deadline-input"
             type="date"
             name="deadline"
             value={newProject.deadline}
             onChange={handleInputChange}
+            aria-label="Project deadline"
             required
           />
         </div>

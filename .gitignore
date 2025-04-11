@@ -7,45 +7,67 @@ package-lock.json
 
 # Testing
 /coverage
+.nyc_output
 
-# Production
-/build
-/dist
+# Turbo
+.turbo/
+
+# Build outputs
+/build/
+/dist/
+/out/
+*.tsbuildinfo
+
+# Next.js
+.next/
+out/
 
 # Environment variables
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env.*
+!.env.example
 
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+pnpm-debug.log*
 
 # Editor directories and files
 .idea/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 *.swp
 *.swo
 .DS_Store
 
-# MongoDB
+# Database
 data/
 dump/
+*.sqlite
+*.db
 
-# Uploads
+# Uploads and media
 uploads/
 /public/uploads/
+/media/
+
+# Cache
+.cache/
+.eslintcache
+.stylelintcache
 
 # Misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.cache/
-../../docs/** /*
+.tmp/
+temp/
+.vercel
+.netlify
+storybook-static

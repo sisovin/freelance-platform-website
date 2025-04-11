@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+interface Post {
+  id: string | number;
+  content: string;
+}
+
 const SocialNetworkPosts = () => {
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [newPost, setNewPost] = useState('');
 
   useEffect(() => {
@@ -19,11 +24,11 @@ const SocialNetworkPosts = () => {
     fetchPosts();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewPost(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('/api/posts', {
@@ -46,11 +51,15 @@ const SocialNetworkPosts = () => {
       <h2>Social Network Posts</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>New Post:</label>
+          <label htmlFor="new-post-textarea">New Post:</label>
           <textarea
+            id="new-post-textarea"
             value={newPost}
             onChange={handleInputChange}
             required
+            placeholder="What's on your mind?"
+            title="New post content"
+            aria-label="New post textarea"
           />
         </div>
         <button type="submit">Post</button>

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+interface Friend {
+  id: string | number;
+  name: string;
+}
+
 const Friends = () => {
-  const [friends, setFriends] = useState([]);
+  const [friends, setFriends] = useState<Friend[]>([]);
   const [newFriend, setNewFriend] = useState('');
 
   useEffect(() => {
@@ -19,11 +24,11 @@ const Friends = () => {
     fetchFriends();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewFriend(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('/api/friends', {
@@ -46,11 +51,14 @@ const Friends = () => {
       <h2>Friends</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>New Friend:</label>
+          <label htmlFor="friend-input">New Friend:</label>
           <input
+            id="friend-input"
             type="text"
             value={newFriend}
             onChange={handleInputChange}
+            placeholder="Enter friend's name"
+            aria-label="New friend name"
             required
           />
         </div>

@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+interface Group {
+  id: string | number;
+  name: string;
+}
+
 const Groups = () => {
-  const [groups, setGroups] = useState([]);
+  const [groups, setGroups] = useState<Group[]>([]);
   const [newGroup, setNewGroup] = useState('');
 
   useEffect(() => {
@@ -19,11 +24,11 @@ const Groups = () => {
     fetchGroups();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewGroup(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('/api/groups', {
@@ -46,11 +51,14 @@ const Groups = () => {
       <h2>Groups</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>New Group:</label>
+          <label htmlFor="group-input">New Group:</label>
           <input
+            id="group-input"
             type="text"
             value={newGroup}
             onChange={handleInputChange}
+            placeholder="Enter group name"
+            aria-label="New group name"
             required
           />
         </div>

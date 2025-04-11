@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 const Media = () => {
-  const [mediaFiles, setMediaFiles] = useState([]);
-  const [newMedia, setNewMedia] = useState(null);
+  const [mediaFiles, setMediaFiles] = useState<any[]>([]);
+  const [newMedia, setNewMedia] = useState<File | null>(null);
 
   useEffect(() => {
     // Fetch media files from the server
@@ -19,14 +19,19 @@ const Media = () => {
     fetchMediaFiles();
   }, []);
 
-  const handleFileChange = (e) => {
-    setNewMedia(e.target.files[0]);
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setNewMedia(e.target.files[0]);
+    }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append('file', newMedia);
+    
+    if (newMedia) {
+      formData.append('file', newMedia);
+    }
 
     try {
       const response = await fetch('/api/media', {
@@ -48,8 +53,11 @@ const Media = () => {
         <div>
           <label>Upload Media:</label>
           <input
+            id="media-upload"
             type="file"
             onChange={handleFileChange}
+            aria-label="Upload media file"
+            title="Select a file to upload"
             required
           />
         </div>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const Pages = () => {
-  const [pages, setPages] = useState([]);
+  const [pages, setPages] = useState<any[]>([]);
   const [newPage, setNewPage] = useState('');
 
   useEffect(() => {
@@ -19,11 +19,11 @@ const Pages = () => {
     fetchPages();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setNewPage(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('/api/pages', {
@@ -46,11 +46,15 @@ const Pages = () => {
       <h2>Pages</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>New Page:</label>
+          <label htmlFor="new-page-content">New Page:</label>
           <textarea
+            id="new-page-content"
             value={newPage}
             onChange={handleInputChange}
             required
+            placeholder="Enter page content here"
+            title="Content for the new page"
+            aria-label="New page content"
           />
         </div>
         <button type="submit">Create Page</button>

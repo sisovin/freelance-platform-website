@@ -1,8 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
+
+interface Blog {
+  id: string;
+  title: string;
+  content: string;
+}
+
+interface NewBlog {
+  title: string;
+  content: string;
+}
 
 const Blogs = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [newBlog, setNewBlog] = useState({
+  const [blogs, setBlogs] = useState<Blog[]>([]);
+  const [newBlog, setNewBlog] = useState<NewBlog>({
     title: '',
     content: ''
   });
@@ -18,11 +29,11 @@ const Blogs = () => {
         console.error('Error fetching blogs:', error);
       }
     };
-
+    
     fetchBlogs();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setNewBlog({
       ...newBlog,
@@ -30,7 +41,7 @@ const Blogs = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('/api/blogs', {
@@ -56,21 +67,27 @@ const Blogs = () => {
       <h2>Blogs</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title:</label>
+          <label htmlFor="title-input">Title:</label>
           <input
+            id="title-input"
             type="text"
             name="title"
             value={newBlog.title}
             onChange={handleInputChange}
+            placeholder="Enter blog title"
+            aria-label="Blog title"
             required
           />
         </div>
         <div>
-          <label>Content:</label>
+          <label htmlFor="content-input">Content:</label>
           <textarea
+            id="content-input"
             name="content"
             value={newBlog.content}
             onChange={handleInputChange}
+            placeholder="Enter blog content"
+            aria-label="Blog content"
             required
           />
         </div>

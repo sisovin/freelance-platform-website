@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 const RealtimeChat = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<any[]>([]);
   const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
@@ -19,11 +19,11 @@ const RealtimeChat = () => {
     fetchMessages();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNewMessage(e.target.value);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('/api/chat/messages', {
@@ -53,12 +53,16 @@ const RealtimeChat = () => {
       </div>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>New Message:</label>
+          <label htmlFor="new-message-input">New Message:</label>
           <input
+            id="new-message-input"
             type="text"
             value={newMessage}
             onChange={handleInputChange}
             required
+            placeholder="Type your message here"
+            title="New message content"
+            aria-label="New message input"
           />
         </div>
         <button type="submit">Send</button>

@@ -1,7 +1,15 @@
 import React, { useState, useEffect } from 'react';
 
+interface Job {
+  id: string | number;
+  title: string;
+  description: string;
+  location: string;
+  salary: string;
+}
+
 const JobPortal = () => {
-  const [jobListings, setJobListings] = useState([]);
+  const [jobListings, setJobListings] = useState<Job[]>([]);
   const [newJob, setNewJob] = useState({
     title: '',
     description: '',
@@ -24,7 +32,7 @@ const JobPortal = () => {
     fetchJobListings();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setNewJob({
       ...newJob,
@@ -32,7 +40,7 @@ const JobPortal = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('/api/jobs', {
@@ -60,41 +68,53 @@ const JobPortal = () => {
       <h2>Job Portal</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Title:</label>
+          <label htmlFor="job-title">Title:</label>
           <input
+            id="job-title"
             type="text"
             name="title"
             value={newJob.title}
             onChange={handleInputChange}
+            placeholder="Enter job title"
+            aria-label="Job title"
             required
           />
         </div>
         <div>
-          <label>Description:</label>
+          <label htmlFor="job-description">Description:</label>
           <textarea
+            id="job-description"
             name="description"
             value={newJob.description}
             onChange={handleInputChange}
+            placeholder="Enter job description"
+            aria-label="Job description"
             required
-          />
+          ></textarea>
         </div>
         <div>
-          <label>Location:</label>
+          <label htmlFor="job-location">Location:</label>
           <input
+            id="job-location"
             type="text"
             name="location"
             value={newJob.location}
             onChange={handleInputChange}
+            placeholder="Enter job location"
+            aria-label="Job location"
             required
           />
         </div>
         <div>
-          <label>Salary:</label>
+          <label htmlFor="job-salary">Salary:</label>
           <input
+            id="job-salary"
             type="text"
             name="salary"
             value={newJob.salary}
             onChange={handleInputChange}
+            placeholder="Enter job salary"
+            aria-label="Job salary"
             required
           />
         </div>

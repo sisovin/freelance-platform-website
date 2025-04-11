@@ -23,7 +23,7 @@ const UserProfile = () => {
     fetchUserData();
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setUserData({
       ...userData,
@@ -31,7 +31,7 @@ const UserProfile = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await fetch('/api/user/profile', {
@@ -53,37 +53,44 @@ const UserProfile = () => {
       <h2>User Profile</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Username:</label>
+          <label htmlFor="username">Username:</label>
           <input
             type="text"
+            id="username"
             name="username"
             value={userData.username}
             onChange={handleInputChange}
             required
+            placeholder="Enter your username"
           />
         </div>
         <div>
-          <label>Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
+            id="email"
             name="email"
             value={userData.email}
             onChange={handleInputChange}
             required
+            placeholder="Enter your email address"
           />
         </div>
         <div>
-          <label>Bio:</label>
+          <label htmlFor="bio">Bio:</label>
           <textarea
+            id="bio"
             name="bio"
             value={userData.bio}
             onChange={handleInputChange}
+            placeholder="Tell us about yourself"
           />
         </div>
         <div>
-          <label>Profile Picture URL:</label>
+          <label htmlFor="profilePicture">Profile Picture URL:</label>
           <input
             type="text"
+            id="profilePicture"
             name="profilePicture"
             value={userData.profilePicture}
             onChange={handleInputChange}
